@@ -35,6 +35,9 @@ import AddCourse from "./components/core/Dashboard/AddCourse/AddCourse";
 import ViewCourse from "./pages/ViewCourse";
 import VideoDetails from './components/core/ViewCourse/VideoDetails';
 
+import ManageUsers from './components/core/Dashboard/admin/ManageUsers';
+import ManageCourses from './components/core/Dashboard/admin/ManageCourses';
+
 import { ACCOUNT_TYPE } from './utils/constants';
 
 import { HiArrowNarrowUp } from "react-icons/hi"
@@ -87,13 +90,14 @@ function App() {
       </button>
 
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="catalog/:catalogName" element={<Catalog />} />
         <Route path="courses/:courseId" element={<CourseDetails />} />
 
-        {/* Open Route - for Only Non Logged in User */}
+        {/* Open Routes - Accessible only to non-logged-in users */}
         <Route
           path="signup" element={
             <OpenRoute>
@@ -137,7 +141,7 @@ function App() {
 
 
 
-        {/* Protected Route - for Only Logged in User */}
+        {/* Protected Routes - Accessible only to logged-in users */}
         {/* Dashboard */}
         <Route element={
           <ProtectedRoute>
@@ -147,6 +151,14 @@ function App() {
         >
           <Route path="dashboard/my-profile" element={<MyProfile />} />
           <Route path="dashboard/Settings" element={<Settings />} />
+
+          {/* Admin Routes */}
+          {user?.accountType === ACCOUNT_TYPE.ADMIN && (
+            <>
+              <Route path="dashboard/admin/manage-users" element={<ManageUsers/>}/>
+              <Route path="dashboard/admin/manage-courses" element={<ManageUsers/>}/>
+            </>
+          )}
 
           {/* Route only for Students */}
           {/* cart , EnrolledCourses */}

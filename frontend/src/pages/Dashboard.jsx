@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Outlet } from "react-router-dom"
 import Sidebar from '../components/core/Dashboard/Sidebar'
 import Loading from '../components/common/Loading'
+import {ACCOUNT_TYPE} from '../utils/constants'
 
 const Dashboard = () => {
 
@@ -17,11 +18,28 @@ const Dashboard = () => {
             </div>
         )
     }
+
     // Scroll to the top of the page when the component mounts
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [])
 
+    // Check the user's role to determine which content should be displayed
+    const renderContent = () => {
+        if (user?.accountType === ACCOUNT_TYPE.ADMIN) {
+            return <Outlet />;
+        }
+        if (user?.accountType === ACCOUNT_TYPE.INSTRUCTOR) {
+            return <Outlet />;
+        }
+        if (user?.accountType === ACCOUNT_TYPE.STUDENT) {
+            return <Outlet />;
+        }
+
+        // Default case if no valid account type is found
+        
+        return <p>You do not have permission to access this dashboard.</p>;
+    }
     return (
         <div className='relative flex min-h-[calc(100vh-3.5rem)] '>
             <Sidebar />

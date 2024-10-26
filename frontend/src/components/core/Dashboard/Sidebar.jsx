@@ -51,6 +51,9 @@ export default function Sidebar() {
     else dispatch(setOpenSideMenu(true))
   }, [screenSize])
 
+  console.log(sidebarLinks);
+
+  console.log(user)
 
 
   if (profileLoading || authLoading) {
