@@ -156,7 +156,7 @@ function App() {
           {user?.accountType === ACCOUNT_TYPE.ADMIN && (
             <>
               <Route path="dashboard/admin/manage-users" element={<ManageUsers/>}/>
-              <Route path="dashboard/admin/manage-courses" element={<ManageUsers/>}/>
+              <Route path="dashboard/admin/manage-courses" element={<ManageCourses/>}/>
             </>
           )}
 
